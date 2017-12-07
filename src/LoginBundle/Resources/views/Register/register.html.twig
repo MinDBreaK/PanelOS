@@ -1,0 +1,79 @@
+{% extends '::template.html.twig' %}
+
+{% block body %}
+	<div class="z-depth-3 register-page">
+		<h1>Register an account</h1>
+		{{ form_start( form ) }}
+			{% if form_errors(form) is not empty %}
+				<div class="error-message">	
+					<p><i class="material-icons prefix">error</i>{{ form_errors(form) }}</p>
+				</div>
+			{% endif %}
+			<div class="row">
+				<div class="col s12 m6 input-field">
+					{{ form_label(form.name)  }}
+					{{ form_widget(form.name) }}
+				</div>
+
+				<div class="col s12 m6 input-field">
+					{{ form_label(form.surname)  }}
+					{{ form_widget(form.surname) }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col s12 input-field">
+					{{ form_label(form.birthday)  }}
+					{{ form_widget(form.birthday) }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col s12 input-field">
+					{{ form_label(form.username)  }}
+					{{ form_widget(form.username) }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col s12 input-field">
+					{{ form_label(form.email)  }}
+					{{ form_widget(form.email, {"attr": {"class": "validate"}} ) }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col s12 m6 input-field">
+					{{ form_label(form.password.first)  }}
+					{{ form_widget(form.password.first) }}
+				</div>
+
+				<div class="col s12 m6 input-field">
+					{{ form_label(form.password.second)  }}
+					{{ form_widget(form.password.second) }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col s12 input-field">
+					{{ form_label(form.salt)  }}
+					{{ form_widget(form.salt) }}
+				</div>
+			</div>
+
+		{{ form_widget(form._token)}}	
+		<button type="submit" class="btn btn-primary">Register</button>
+		{{ form_end( form   ) }}
+	</div>
+{% endblock %}
+
+{% block moreScripts %}
+    <script type="text/javascript">
+		$('.datepicker').pickadate({
+			format: 'dd/mm/yyyy',
+			max: new Date("now"),
+			selectMonths: true, // Creates a dropdown to control month
+			selectYears: 130, 	// Creates a dropdown of 15 years to control year
+		});
+	</script>
+{% endblock %}

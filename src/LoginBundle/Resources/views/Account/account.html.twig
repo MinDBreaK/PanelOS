@@ -1,0 +1,354 @@
+{% extends '::template.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid fullHeight">
+        <div class="row fullHeight">
+            <div class="col-sm-12 col-md-4 col-lg-3 flex-center flex-column leftAccount fullHeight">
+                <img src="{{ asset("img/users/logo/default.jpg") }}" class="img-fluid account--image rounded-circle z-depth-1">
+                <div class="row mt-5">
+                    <span class="center-align account--username">{{ app.user.username }}</span>
+                </div>
+                <div class="row mt-5">
+                    <span class="center-align account--name">{{ app.user.surname }} {{ app.user.name }}</span>
+                </div>
+                <div class="row mt-5">
+                    {% for role in roles %}
+                        <span class="center-align account--roles">{{ role.display }}{% if not loop.last %}, {% endif %}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-8 col-lg-9">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="nav nav-tabs" id="accountTab" role="tablist">
+                            <a class="nav-link nav-item {% if focus == 1 %}active{% endif %}" href="#informations"   data-toggle="tab" role="tab" aria-controls="nav-info"     aria-selected="true" >Informations</a>
+
+                            <a class="nav-link nav-item {% if focus == 2 %}active{% endif %}" href="#security"       data-toggle="tab" role="tab" aria-controls="nav-security" aria-selected="false" > Security</a>
+
+                            <a class="nav-link nav-item {% if focus == 3 %}active{% endif %}" href="#linkedAccounts" data-toggle="tab" role="tab" aria-controls="nav-accounts" aria-selected="false" >Linked Accounts</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content row">
+                    <div id="informations"   class="col-sm-12 tab-pane show  {% if focus == 1 %}active{% endif %}"   role="tabpanel" aria-labelledby="nav-info">
+                        <div class="container-fluid">
+                            <div class="row mt-3">
+                                <div class="col-sm-12">
+                                    <h3>Basics info</h3>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-sm-12">
+                                    {{ form_start( infoForm )  }}
+                                        {% if form_errors(infoForm) is not empty %}
+                                            <blockquote class="blockquote bq-danger">
+                                                <p class="bq-title">Errors</p>
+                                                <p>{{ form_errors(infoForm) }}</p>
+                                            </blockquote>
+                                        {% endif %}
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="md-form">
+                                                    {{ form_label(infoForm.surname)  }}
+                                                    {{ form_widget(infoForm.surname) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="md-form">
+                                                    {{ form_label(infoForm.name)  }}
+                                                    {{ form_widget(infoForm.name) }}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="md-form">
+                                                    {{ form_label(infoForm.birthday)  }}
+                                                    {{ form_widget(infoForm.birthday) }}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="md-form">
+                                                    {{ form_label(infoForm.email)  }}
+                                                    {{ form_widget(infoForm.email, {"attr": {"class": "validate"}} ) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    {{ form_end( infoForm )  }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="security"       class="col-sm-12 tab-pane       {% if focus == 2 %}active{% endif %}"   role="tabpanel" aria-labelledby="nav-secu">
+                        <div class="container-fluid">
+                            <div class="row mt-3">
+                                <div  class="col-sm-12">
+                                    <h3>Security</h3>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-sm-12">
+                                    {{ form_start( securityForm )  }}
+                                        {% if form_errors(securityForm) is not empty %}
+                                            <blockquote class="blockquote bq-danger">
+                                                <p class="bq-title">Errors</p>
+                                                {{ form_errors(securityForm) }}
+                                            </blockquote>
+                                        {% endif %}
+
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="md-form">
+                                                    {{ form_label(securityForm.password.first)  }}
+                                                    {{ form_widget(securityForm.password.first) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="md-form">
+                                                    {{ form_label(securityForm.password.second)  }}
+                                                    {{ form_widget(securityForm.password.second) }}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="md-form">
+                                                    {{ form_label(securityForm.salt)  }}
+                                                    {{ form_widget(securityForm.salt) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <button type="submit" class="col-sm-12 col-md-6 col-lg-2 btn btn-primary">Update</button>
+                                        </div>
+                                    {{ form_end( securityForm )  }}
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <h3>Two-Factor Authentication</h3>
+                            </div>
+
+
+                            <div class="row mt-3 flex-center hoverable">
+                                <div class="col-sm-12 col-md-6 col-lg-8">
+                                    <p>
+                                        {% if app.user.googleAuthenticatorCode is not null %}
+                                            Google Two-Factors Authentication is <span class="green-text">ENABLED</span>
+                                        {% else %}
+                                            Google Two-Factors Authentication is <span class="red-text">DISABLED</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                {% if app.user.googleAuthenticatorCode is not null %}
+                                    <a href="{{ path("security_2fa_disable") }}" class="btn red right waves col-sm-12 col-md-5 col-lg-2 ml-auto">Disable</a>
+                                {% else %}
+                                    <a href="{{ path("security_2fa_enable") }}"  class="btn green right waves col-sm-12 col-md-5 col-lg-2 ml-auto">Enable</a>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="linkedAccounts" class="col-sm-12 tab-pane       {% if focus == 3 %}active{% endif %}"   role="tabpanel" aria-labelledby="nav-accounts">
+                        <table class="table table-hover">
+
+                            <!--Table head-->
+                            <thead class="blue-grey lighten-4">
+                                <tr>
+                                    <th></th>
+                                    <th>Website</th>
+                                    <th>Username</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row" class="w-auto"><img src="{{ asset("img/oauth/octocat.png") }}" alt="GitHub Octocat" class="img-fluid accounts--image"></th>
+                                    <td class="align-middle">Github</td>
+                                    <td class="align-middle">Pseudo</td>
+                                    <td class="align-middle">
+                                        {% if app.user.githubToken is not null %}
+                                            <a href="{{ path("github_disconnect") }}" class="right btn red" >Disconnect</a>
+                                        {% else %}
+                                            <a href="{{ path("github_connect") }}" class="right btn green" data-toggle="modal" data-target="#githubActivation">Connect</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade right" id="githubActivation" tabindex="-1" role="dialog" aria-labelledby="githubActivation" aria-hidden="true">
+            <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <p class="heading lead">Github Connection</p>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="white-text">&times;</span>
+                        </button>
+                    </div>
+
+                    <!--Body-->
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <i class="fa fa-github fa-4x mb-3 animated fadeIn black-text"></i>
+                            <p>
+                                Activating GitHub will allow you to access to the functionnalities related to GitHub like :
+                            </p>
+                            <ul>
+                                <li>Auto-deploy</li>
+                                <li>Git Project Cloning</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!--Footer-->
+                    <div class="modal-footer justify-content-center">
+                        <a type="button" class="btn btn-outline-secondary-modal waves-effect" data-dismiss="modal">Later</a>
+                        <a type="button" class="btn btn-primary-modal" onclick="githubConnectCheckStart()">Connect <i class="fa fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+        <!-- Central Modal Medium Info-->
+
+        <div class="modal fade show" id="githubSuccessModal" tabindex="-1" role="dialog" aria-labelledby="githubSuccessModal">
+            <div class="modal-dialog modal-notify modal-success" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <p class="heading lead">Modal Success</p>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="white-text">×</span>
+                        </button>
+                    </div>
+
+                    <!--Body-->
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                            <p>
+                                Your Github Account has been sucessfully connected !
+                                You will now have access to related functionnalities.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!--Footer-->
+                    <div class="modal-footer justify-content-center">
+                        <a type="button" class="btn btn-outline-secondary-modal waves-effect" data-dismiss="modal">Close</a>
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+    </div>
+
+    {# OAuth Modal #}
+    <div class="modal fade show" id="OAuthModal" tabindex="-1" role="dialog" aria-labelledby="OAuthModal">
+        <div class="modal-dialog modal-lg" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <h4 class="modal-title w-100" id="OAuthModalLabel">Github OAuth</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <iframe id="OAuthIframe" src="about:blank" class="container-fluid" style="height: 80vh;"></iframe>
+                </div>
+                <!--Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block moreScripts %}
+    <script type="text/javascript">
+        let intervalConnectionChecker;
+
+        $(document).ready(function() {
+            $('#accountTab').find('a:nth-child({{ focus }})').tab('show');
+        });
+        let closeOAuthModal = function () {
+            $("#OAuthModal").modal("hide");
+        };
+        let openGithubWindow = function(url) {
+            //let oAuthWindow = window.open(url, "_blank", "toolbar=no,scrollbars=no,resizable=no,width=470,height=750");
+
+            //oAuthWindow.focus();
+            $("#OAuthIframe").attr("src", url);
+            $("#OAuthModal").modal("show");
+        };
+        let retriveOAuthURL = function () {
+            $.ajax({
+                url: '{{ path('github_retriveOAuthURL') }}',
+                type: 'GET',
+                dataType: 'json', // On désire recevoir du JSON
+                success: function (json, statut) {
+                    if (json.url !== null) {
+                        openGithubWindow(json.url);
+                    }
+                }
+            });
+        };
+
+        let githubConnectCheckStart = function () {
+            intervalConnectionChecker = window.setInterval(checkConnection, 2000);
+            retriveOAuthURL();
+
+        };
+
+        let githubConnectCheckEnd = function () {
+            window.clearInterval(intervalConnectionChecker);
+        };
+
+        let checkConnection = function() {
+            $.ajax({
+
+                url : '{{ path('github_checkConnection') }}',
+
+                type : 'GET',
+
+                dataType : 'json', // On désire recevoir du HTML
+
+                success : function(json, statut){ // code_html contient le HTML renvoyé
+                    console.log(json);
+                    if (json.state === 1)
+                    {
+                        githubConnectCheckEnd();
+                        $('#githubActivation').modal('hide');
+                        $('#githubSuccessModal').modal("show");
+                    }
+                }
+            });
+        };
+    </script>
+{% endblock %}

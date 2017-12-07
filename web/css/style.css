@@ -1,0 +1,155 @@
+html, body {
+    height: 100%;
+}
+
+.fullHeight {
+    height: calc(100vh - 64px);
+}
+
+.login-form {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 40vw;
+	margin-top: -20vh;
+	margin-left: -20vw;
+	padding: 15px;
+	padding-bottom: 30px;
+	border-radius: 3px;
+}
+
+
+
+.tfa1 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 40vw;
+	margin-top: -20vh;
+	margin-left: -20vw;
+    padding: 15px 15px 30px;
+    border-radius: 3px;
+}
+
+.tfa2 {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	width: 40vw;
+	margin-top: -20vh;
+	margin-left: -20vw;
+    padding: 15px 15px 30px;
+    border-radius: 3px;
+}
+
+
+/* Saisie du code 2FA */ 
+.tfa-enter {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	width: 40vw;
+	margin-top: -20vh;
+	margin-left: -20vw;
+	padding: 15px;
+	padding-bottom: 30px;
+	border-radius: 3px;
+}
+
+@media screen and (max-width: 1070px ) {
+	.tfa-enter {
+		position: absolute;
+		top: 40%;
+		left: 40%;
+		width: 60vw;
+		margin-top: -20vh;
+		margin-left: -20vw;
+		padding: 15px;
+		padding-bottom: 30px;
+		border-radius: 3px;
+	}
+}
+
+@media screen and (max-width: 690px ) {
+	.tfa-enter {
+		position: absolute;
+		top: 35%;
+		left: 22%;
+		width: 95vw;
+		margin-top: -20vh;
+		margin-left: -20vw;
+		padding: 15px;
+		padding-bottom: 30px;
+		border-radius: 3px;
+	}
+
+	.tfa-form > h1 {
+		font-size: 2rem;
+	}
+}
+
+.tfa-d {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 40vw;
+	margin-top: -20vh;
+	margin-left: -20vw;
+	padding: 15px;
+	padding-bottom: 30px;
+	border-radius: 3px;
+}
+
+.register-page {
+	border-radius: 3px;
+	padding: 10px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 75vw;
+	margin-top: -35vh;
+	margin-left: -35vw;
+	margin-bottom: 100px;
+}
+
+
+/****
+**** PROFILE PAGE
+****/
+@media screen and (min-width: 600px ) {
+	.leftAccount {
+        border-right: 1px solid #90a4ae;
+    }
+}
+
+@media screen and (max-width: 600px ) {
+	.leftAccount {
+        border-bottom: 1px solid #90a4ae;
+    }
+
+}
+
+.account--image{
+	height: 250px;
+	width: 250px;
+}
+
+.account--username {
+	font-size: 2.8rem;
+}
+
+.account--name {
+	font-size: 1.8rem;
+}
+
+.account--roles {
+	font-size: 1.3rem;
+}
+
+/****
+**** LINKED Accounts
+****/
+
+.accounts--image{
+	height: 100px;
+}

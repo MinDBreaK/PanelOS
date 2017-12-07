@@ -1,0 +1,41 @@
+{% extends '::template.html.twig' %}
+{% block body %}
+
+	<form class="login-form z-depth-5" action="{{ path('main_login') }}" method="post">
+			{% if error %}
+				<div class="error-message">	
+					<p><i class="material-icons prefix">error</i>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+				</div>
+			{% endif %}
+		<div class="row">
+			<div class="col s12 input-field">
+				<label for="username">Username :</label>
+				<input type="text" id="username" name="_username" value="{{ last_username }}" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s12 input-field">
+				<label for="password">Password</label>
+				<input type="password" id="password" name="_password" />
+			</div>
+			
+		</div>
+		
+		<div class="row">
+			<p class="col s12">
+				<input type="checkbox" id="remember_me" name="_remember_me" checked />
+				<label for="remember_me">Remember me ? </label>
+			</p>	
+		</div>
+		{#
+			If you want to control the URL the user
+			is redirected to on success (more details below)
+			<input type="hidden" name="_target_path" value="/account" />
+		#}
+		<div class="row">
+			<div class="col s12 input-field">
+				<button class="btn btn-primary" type="submit">Connexion</button>
+			</div>
+		</div>
+	</form>
+{% endblock %}

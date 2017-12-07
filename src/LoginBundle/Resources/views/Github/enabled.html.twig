@@ -1,0 +1,13 @@
+{% extends '::template.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid fullHeight flex-center">
+        <div class="row">
+            <h1>GitHub is connected !</h1>
+            <p>Your account is now linked to GitHub !</p>
+            <p>You will now have access to GitHub related functions.</p>
+            <a href="{{ path( "account_index" ) }}" class="btn btn-primary right">Back to the account <i class="material-icons">arrow_forward</i></a>
+        </div>
+    </div>
+
+{% endblock %}

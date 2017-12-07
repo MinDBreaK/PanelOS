@@ -1,0 +1,38 @@
+{% extends '::template.html.twig' %}
+
+{% block body %}
+    <div class="tfa2 z-depth-5">
+		<h1>Enable 2FA - Step 2</h1>
+		
+		<div class="row">
+			<div class="col s12 m6">
+				<p>Flash this QRCode :</p>
+				<img src="{{ url }}">
+			</div>
+
+			<div class="col s12 m6">
+				<p>Or define the parameters to : 
+					<ul>
+						<li>Server : {{ server }}</li>
+						<li>Key : {{ key }}</li>
+					</ul>
+				</p>
+			</div>
+		</div>
+
+		<div class="row">
+			{{ form_start( form )}}
+				<div class="input-field col s12 m6">
+					{{form_row( form.code ) }}
+				</div>
+				<div class="input-field col s12 m4 offset-m2">
+					<button type="submit" href="{{ path( "security_2fa_enable_2" ) }}" class="btn btn-primary">Check the code <i class="material-icons">arrow_forward</i></button>
+				</div>
+			{{ form_end( form ) }}
+		</div>
+		
+	</div>
+{% endblock %}
+
+{% block moreScripts %}
+{% endblock %}

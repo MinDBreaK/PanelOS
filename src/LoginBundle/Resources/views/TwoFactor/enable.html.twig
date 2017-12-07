@@ -1,0 +1,16 @@
+{% extends '::template.html.twig' %}
+
+{% block body %}
+	<div class="tfa1 z-depth-5">
+		<h1>Enable 2FA</h1>
+		<p>You are about to enable 2FA system. You need to have an application in order to generate unique code</p>
+		<p>If you don't have one, you can download one on your mobile store like :
+			<ul class="browser-default">
+				<li>Authy</li>
+				<li>LastPass Authenticator</li>
+				<li>Google Authenticator</li>
+			</ul>
+		</p>
+		<a href="{{ path( "security_2fa_enable_2" ) }}" class="btn btn-primary right">Next Step <i class="material-icons">arrow_forward</i></a>
+	</div>
+{% endblock %}

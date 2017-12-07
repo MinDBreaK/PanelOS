@@ -1,0 +1,10 @@
+{% extends '::template.html.twig' %}
+
+{% block body %}
+    <div class="login-form z-depth-5">
+		<h1>GitHub is disconnected</h1>
+		<p>Your account is no longer linked to GitHub !</p>
+		<p>You will no longer have access to GitHub related functions. However, previous actions will not be reversed.</p>
+		<a href="{{ path( "account_index" ) }}" class="btn btn-primary right">Back to the account <i class="material-icons">arrow_forward</i></a>
+	</div>
+{% endblock %}

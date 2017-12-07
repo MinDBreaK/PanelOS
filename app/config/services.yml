@@ -1,0 +1,36 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+    login_user.twofactor.google.class:                               Google\Authenticator\GoogleAuthenticator
+    login_user.twofactor.google.provider.class:                      LoginBundle\Security\Helper
+    login_user.twofactor.google.interactive_login_listener.class:    LoginBundle\Security\InteractiveLoginListener
+    login_user.twofactor.google.request_listener.class:              LoginBundle\Security\RequestListener
+
+services:
+    #service_name:
+    #    class: AppBundle\Directory\ClassName
+    #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+    main.for.registration:
+        class: LoginBundle\Form\UserType
+        tags: 
+            - { name: form.type, alias: main_registration }
+
+    login_user.twofactor.google: 
+        class: %login_user.twofactor.google.class%
+    
+    login_user.twofactor.google.provider:
+        class: %login_user.twofactor.google.provider.class%
+        arguments: [ MyServer, '@login_user.twofactor.google' ]
+    
+    login_user.twofactor.google.interactive_login_listener: 
+        class: %login_user.twofactor.google.interactive_login_listener.class%
+        arguments: ['@login_user.twofactor.google.provider']
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
+   
+    login_user.twofactor.google.request_listener:
+        class: %login_user.twofactor.google.request_listener.class%
+        arguments: ['@login_user.twofactor.google.provider', '@security.token_storage', '@templating', '@router']
+        tags: 
+            - { name: kernel.event_listener, event: kernel.request, method: onCoreRequest, priority: -1 }

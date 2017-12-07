@@ -1,0 +1,38 @@
+{% extends '::template.html.twig' %}
+
+{% block body %}
+	<div class="tfa-enter z-depth-5 row">
+		<form class="col s12 tfa-form" action="" method="post">
+			<h1>Two Factor Authentication</h1>
+			<div class="row">
+				{% for flashMessage in app.session.flashbag.get("error") %}
+					<p class="error-message">{{ flashMessage }}</p>
+				{% endfor %}
+			</div>
+
+			<div class="row">
+				<div class="input-field col s12">
+					<label for="_auth_code">Authentication Code</label>
+					<input id="_auth_code" name="_auth_code" type="text" autocomplete="off"  />
+				</div>
+			</div>
+			
+
+
+
+			<div class="row input-field">
+				<div class="col m3 s6">
+					<input class="btn btn-primary green" type="submit" value="Login" />
+				</div>
+				<div class="col m6 hide-on-small-only"></div>
+				<div class="col m3 s6" >
+					<a class="btn btn-primary red" href="{{ path("logout") }}">Cancel</a>
+				</div>
+			</div>
+			
+			<p class="cancel"><a href="{{ path("logout") }}">Cancel</a></p>
+		
+		</form>
+	</div>
+
+{% endblock %}

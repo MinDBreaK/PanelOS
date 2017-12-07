@@ -1,0 +1,14 @@
+{% extends '::template.html.twig' %}
+
+{% block body %}
+    <div class="tfa-d z-depth-5">
+    	<h1>Disabling 2FA</h1>
+    	<p>You are about to disable the Two Factor Authentication.</p>
+    	<p><span class="red-text">YOUR ACCOUNT WILL NO LONGER BE FULLY SECURED !</span></p>
+    	<p>If you are sure that you want to remove this layer of seurity, hit the confirm button. Otherwise, hit cancel.</p>
+    	<div class="row">
+    		<a href="{{ path("account_index") }}" class="btn green left">Cancel</a>
+    		<a href="{{ path("security_2fa_disabled") }}" class="btn red right">Confirm</a>
+    	</div>
+    </div>
+{% endblock %}

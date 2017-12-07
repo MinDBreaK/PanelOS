@@ -1,0 +1,10 @@
+{% extends '::template.html.twig' %}
+
+{% block body %}
+    <div class="login-form z-depth-5">
+		<h1>2FA Enabled !</h1>
+		<p>Your account is now protected with 2FA !</p>
+		<p>Be sure to keep your authenticator safe and don't lose your key! There is no way to get it back. You should disable 2FA before deleting your application.</p>
+		<a href="{{ path( "account_index" ) }}" class="btn btn-primary right">Back to the account <i class="material-icons">arrow_forward</i></a>
+	</div>
+{% endblock %}
