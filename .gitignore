@@ -14,3 +14,13 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+
+betatest\.net\.sublime-project
+
+betatest\.net\.sublime-workspace
+
+composer\.phar
+
+notes\.txt
+
+\.idea/
